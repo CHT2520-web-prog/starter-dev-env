@@ -11,19 +11,14 @@
 <h1>PHP + MariaDB</h1>
 
 <?php
-
-$connection = new mysqli(
-    "localhost",
-    "student",
-    "student",
-    "webapp"
-);
-
-if ($connection->connect_error) {
-    die("Database connection failed: " . $connection->connect_error);
+try{
+    $conn = new PDO('mysql:host=127.0.0.1;port=3306;dbname=app', 'app', 'app');
+    $conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 }
-
-echo "<p>Successfully connected to MariaDB!</p>";
+catch (PDOException $exception)
+{
+	echo "Oh no, there was a problem" . $exception->getMessage();
+}
 
 ?>
 

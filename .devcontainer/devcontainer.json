@@ -12,9 +12,10 @@
   },
 
   // The app shares the db container's network, so these cover both
-  "forwardPorts": [8000, 5173, 3306],
+  "forwardPorts": [8000, 8080, 5173, 3306],
   "portsAttributes": {
     "8000": { "label": "Laravel / PHP server", "onAutoForward": "openBrowser" },
+    "8080": { "label": "Adminer", "onAutoForward": "notify" },
     "5173": { "label": "Vite dev server" },
     "3306": { "label": "MariaDB", "onAutoForward": "silent" }
   },

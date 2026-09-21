@@ -19,10 +19,19 @@ services:
     volumes:
       - mariadb-data:/var/lib/mysql
     environment:
-      MARIADB_ROOT_PASSWORD: root
-      MARIADB_DATABASE: app
-      MARIADB_USER: app
-      MARIADB_PASSWORD: app
+      MARIADB_ROOT_PASSWORD: secret
+      MARIADB_DATABASE: webdev
+      MARIADB_USER: root
+      MARIADB_PASSWORD: secret
+
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    # Same trick as the app container: share db's network so MariaDB is
+    # at 127.0.0.1:3306 and Adminer's port 8080 is forwarded with the rest
+    network_mode: service:db
+    environment:
+      ADMINER_DEFAULT_SERVER: 127.0.0.1
 
 volumes:
   mariadb-data:
