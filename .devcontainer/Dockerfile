@@ -1,3 +1,15 @@
-FROM mcr.microsoft.com/devcontainers/php:1-8.5-trixie
+# Base image from the Dev Containers project. It already includes PHP,
+# Composer, Xdebug and common CLI tools. Change VARIANT in
+# docker-compose.yml to pick another PHP version (e.g. 8.4-bookworm).
+ARG VARIANT=8.3-bookworm
+FROM mcr.microsoft.com/devcontainers/php:1-${VARIANT}
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+# MariaDB command-line client, plus build libraries for the PHP extensions
+# that Laravel and MariaDB/MySQL access need.
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends \
+        mariadb-client \
+        libzip-dev \
+        libicu-dev \
+    && docker-php-ext-install pdo_mysql mysqli bcmath zip intl \
+    && apt-get clean -y && rm -rf /var/lib/apt/lists/*

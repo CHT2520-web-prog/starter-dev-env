@@ -1,30 +1,32 @@
 {
-    "name": "PHP + MariaDB",
+  "name": "PHP, MariaDB and Node",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
 
-    "dockerComposeFile": "docker-compose.yml",
-
-    "service": "app",
-
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-
-    "forwardPorts": [8080],
-
-    "portsAttributes": {
-        "8080": {
-            "label": "PHP Website",
-            "onAutoForward": "openPreview"
-        }
-    },
-
-    "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html",
-
-    "postStartCommand": "sudo apache2ctl start",
-
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "bmewburn.vscode-intelephense-client"
-            ]
-        }
+  "features": {
+    // Node.js (LTS) and npm, for Vite / React
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
     }
+  },
+
+  // The app shares the db container's network, so these cover both
+  "forwardPorts": [8000, 5173, 3306],
+  "portsAttributes": {
+    "8000": { "label": "Laravel / PHP server", "onAutoForward": "openBrowser" },
+    "5173": { "label": "Vite dev server" },
+    "3306": { "label": "MariaDB", "onAutoForward": "silent" }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-mysql"
+      ]
+    }
+  }
 }
