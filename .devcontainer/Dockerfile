@@ -4,9 +4,14 @@
 ARG VARIANT=8.3-bookworm
 FROM mcr.microsoft.com/devcontainers/php:1-${VARIANT}
 
-# MariaDB command-line client, plus build libraries for the PHP extensions
-# that Laravel and MariaDB/MySQL access need.
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+# The base image ships a Yarn apt source whose signing key is no longer
+# trusted, which makes `apt-get update` fail. Yarn isn't needed here, so
+# remove that source first (-f keeps this harmless if it's fixed upstream).
+#
+# Then install the MariaDB command-line client, plus build libraries for the
+# PHP extensions that Laravel and MariaDB/MySQL access need.
+RUN rm -f /etc/apt/sources.list.d/yarn.list \
+    && apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
         mariadb-client \
         libzip-dev \
