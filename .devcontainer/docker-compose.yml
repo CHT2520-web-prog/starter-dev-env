@@ -21,7 +21,7 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: secret
       MARIADB_DATABASE: webdev
-      MARIADB_USER: root
+      MARIADB_USER: student
       MARIADB_PASSWORD: secret
 
   adminer:
