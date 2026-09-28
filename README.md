@@ -48,6 +48,7 @@ php -S 0.0.0.0:8000
 ```
 
 A new browser tab should open showing _index.php_. 
+- If this doesn't work, you may have to change the port settings. Select the 'ports' tab (next to terminal). Find port 8000 and toggle the visbility. 
 
 Back in your codespace, make a simple change to the message e.g. add the title of the module.
 
