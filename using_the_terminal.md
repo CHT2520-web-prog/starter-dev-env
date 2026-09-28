@@ -1,6 +1,8 @@
 # Using the Terminal
 
-Here are some basic commands that should helps us navigate our way around our Codespace using the terminal
+Here are some basic commands that should helps us navigate our way around our Codespace using the terminal.
+
+Remember you can use the up/down arrows keys to cycle through previous commands.
 
 ## To open/close the terminal
 
