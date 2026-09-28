@@ -24,9 +24,3 @@ If you start typing e.g. `cd PHP` and hit the tab key, the filename will be comp
 
 Enter `cd ../`
 
-
-Start typing the name 
-and hit tab to complete.
-
-Use the up arrow key to 
-find a previous command e.g. start the server
