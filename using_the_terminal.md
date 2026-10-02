@@ -26,3 +26,8 @@ If you start typing e.g. `cd PHP` and hit the tab key, the filename will be comp
 
 Enter `cd ../`
 
+## To use a previous command
+
+Use the up/down arrows to cycle through the commands you have used.
+
+
